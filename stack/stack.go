@@ -2,31 +2,32 @@ package stack
 
 import "errors"
 
-type Stack struct {
-	b []interface{}
+type Stack []interface{}
+
+func New(size uint32) Stack {
+	return make(Stack, 0, size)
 }
 
-func New(size uint32) *Stack {
-	return &Stack{make([]interface{}, 0, 10)}
-}
-
-func (s *Stack) Top() interface{} {
-	return s.b[len(s.b)-1]
+func (s Stack) Top() (interface{}, error) {
+	if len(s) == 0 {
+		return nil, errors.New("Stack is empty")
+	}
+	return s[len(s)-1], nil
 }
 
 func (s *Stack) Pop() (e interface{}, err error) {
-	if len(s.b) == 0 {
+	if len(*s) == 0 {
 		return nil, errors.New("Stack is empty")
 	}
-	e, err = s.b[len(s.b)-1], nil
-	s.b = s.b[:len(s.b)-1]
+	e, err = (*s)[len(*s)-1], nil
+	*s = (*s)[:len(*s)-1]
 	return
 }
 
 func (s *Stack) Push(e interface{}) {
-	s.b = append(s.b, e)
+	*s = append(*s, e)
 }
 
 func (s *Stack) Clear() {
-	s.b = []interface{}{}
+	*s = []interface{}{}
 }

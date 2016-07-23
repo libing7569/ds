@@ -12,12 +12,15 @@ func TestStack(t *testing.T) {
 		s.Clear()
 		for _, v := range s1 {
 			s.Push(v)
+			fmt.Println("push")
 		}
 
-		if s.Top() != s1[len(s1)-1] {
+		fmt.Println("top")
+		if v, _ := s.Top(); v != s1[len(s1)-1] {
 			t.Error("Top error")
 		}
 
+		fmt.Println("top2")
 		i := len(s1) - 1
 		for v, ok := s.Pop(); ok == nil; v, ok = s.Pop() {
 			fmt.Println(v)
