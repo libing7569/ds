@@ -3,12 +3,13 @@ package heap
 import "errors"
 
 type Heap struct {
-	b    []interface{}
-	comp func(interface{}, interface{}) bool
+	b        []interface{}
+	comp     func(interface{}, interface{}) bool
+	initSize uint32
 }
 
 func New(size uint32, comp func(interface{}, interface{}) bool) *Heap {
-	return &Heap{make([]interface{}, 0, size), comp}
+	return &Heap{make([]interface{}, 0, size), comp, size}
 }
 
 //i start from 1, and the base is start from 0
@@ -24,7 +25,7 @@ func (h *Heap) upShift(i int) {
 }
 
 func (h *Heap) downShift(n int) {
-	for i := 1; i*2 <= n; i *= 2 {
+	for i := 1; i*2 <= n; {
 		idx := i * 2
 		if i*2+1 <= n {
 			if h.comp(h.b[i*2], h.b[i*2-1]) {
@@ -34,6 +35,7 @@ func (h *Heap) downShift(n int) {
 
 		if h.comp(h.b[idx-1], h.b[i-1]) {
 			h.b[idx-1], h.b[i-1] = h.b[i-1], h.b[idx-1]
+			i = idx
 		} else {
 			break
 		}
@@ -46,6 +48,10 @@ func (h *Heap) buildHeap() {
 	}
 }
 
+func (h *Heap) Clear() {
+	h.b = make([]interface{}, 0, h.initSize)
+}
+
 func (h *Heap) Top() (interface{}, error) {
 	if len(h.b) <= 1 {
 		return nil, errors.New("Heap is empty")
@@ -54,11 +60,13 @@ func (h *Heap) Top() (interface{}, error) {
 }
 
 func (h *Heap) Pop() (e interface{}, err error) {
-	if len(h.b) <= 1 {
+	if len(h.b) == 0 {
 		return nil, errors.New("Heap is empty")
 	}
-	e, err = h.b[1], nil
-	h.b = h.b[1:]
+	e, err = h.b[0], nil
+	h.b[0] = h.b[len(h.b)-1]
+	h.downShift(len(h.b) - 1)
+	h.b = h.b[:len(h.b)-1]
 	return
 }
 
@@ -72,7 +80,7 @@ func (h *Heap) Sort() {
 	length := len(h.b)
 	for i := 0; i < length-1; i++ {
 		h.b[0], h.b[length-i-1] = h.b[length-i-1], h.b[0]
-		h.downShift(length - i)
+		h.downShift(length - i - 1)
 	}
 }
 
