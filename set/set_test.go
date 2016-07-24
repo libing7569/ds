@@ -14,4 +14,10 @@ func TestSet(t *testing.T) {
 	if s.Contains(3) != true {
 		t.Error("Set contains error")
 	}
+
+	s.Remove(3)
+
+	if s.Contains(3) == true {
+		t.Error("Set contains error")
+	}
 }

@@ -14,6 +14,12 @@ func (s Set) Add(e interface{}) {
 	s[e] = true
 }
 
+func (s Set) Remove(e interface{}) {
+	if s.Contains(e) {
+		delete(s, e)
+	}
+}
+
 func (s Set) Contains(e interface{}) bool {
 	_, err := s[e]
 	return err
