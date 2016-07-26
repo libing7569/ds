@@ -1,7 +1,6 @@
-package trie_test
+package trie
 
 import (
-	. "ds/trie"
 	"fmt"
 	"testing"
 )
