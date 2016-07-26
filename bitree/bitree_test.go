@@ -1,12 +1,15 @@
-package bitree
+package bitree_test
 
-import "fmt"
-import "testing"
+import (
+	. "ds/bitree"
+	"fmt"
+	"testing"
+)
 
 func TestBiTree(t *testing.T) {
 	bt := New()
-	node := &BiNode{1000, &BiNode{9999999, nil, nil}, nil}
-	bt.root = &BiNode{100, node, &BiNode{2000, &BiNode{99, nil, nil}, nil}}
+	node := NewNode(200, NewNode(1000, nil, nil), NewNode(9999999, nil, nil))
+	bt.SetRoot(NewNode(100, node, NewNode(2000, NewNode(99, nil, nil), nil)))
 	bt.Traverse(func(v interface{}) interface{} {
 		fmt.Println(v)
 		return v

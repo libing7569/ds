@@ -24,6 +24,14 @@ func New() *BiTree {
 	return &BiTree{}
 }
 
+func NewNode(e interface{}, l *BiNode, r *BiNode) *BiNode {
+	return &BiNode{e, l, r}
+}
+
+func (bt *BiTree) SetRoot(root *BiNode) {
+	bt.root = root
+}
+
 func (bt *BiTree) Root() *BiNode {
 	if bt == nil {
 		return nil
