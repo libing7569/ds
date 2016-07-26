@@ -1,7 +1,6 @@
-package bitmap_test
+package bitmap
 
 import (
-	. "bitmap"
 	"math/rand"
 	"testing"
 )
