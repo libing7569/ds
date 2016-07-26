@@ -1,7 +1,6 @@
-package queue_test
+package queue
 
 import (
-	. "ds/queue"
 	"testing"
 )
 
