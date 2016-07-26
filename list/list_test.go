@@ -1,6 +1,7 @@
-package list
+package list_test
 
 import (
+	. "ds/list"
 	"fmt"
 	"testing"
 )
