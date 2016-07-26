@@ -1,6 +1,7 @@
-package bitmap
+package bitmap_test
 
 import (
+	. "ds/bitmap"
 	"math/rand"
 	"testing"
 )
