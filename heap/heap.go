@@ -6,10 +6,11 @@ type Heap struct {
 	b        []interface{}
 	comp     func(interface{}, interface{}) bool
 	initSize uint32
+	size     uint32
 }
 
 func New(size uint32, comp func(interface{}, interface{}) bool) *Heap {
-	return &Heap{make([]interface{}, 0, size), comp, size}
+	return &Heap{make([]interface{}, 0, size), comp, size, 0}
 }
 
 //i start from 1, and the base is start from 0
@@ -42,6 +43,10 @@ func (h *Heap) downShift(n int) {
 	}
 }
 
+func (h *Heap) Size() uint32 {
+	return h.size
+}
+
 func (h *Heap) buildHeap() {
 	for i := 1; i <= len(h.b); i++ {
 		h.upShift(i)
@@ -50,6 +55,7 @@ func (h *Heap) buildHeap() {
 
 func (h *Heap) Clear() {
 	h.b = make([]interface{}, 0, h.initSize)
+	h.size = 0
 }
 
 func (h *Heap) Top() (interface{}, error) {
@@ -67,11 +73,13 @@ func (h *Heap) Pop() (e interface{}, err error) {
 	h.b[0] = h.b[len(h.b)-1]
 	h.downShift(len(h.b) - 1)
 	h.b = h.b[:len(h.b)-1]
+	h.size -= 1
 	return
 }
 
 func (h *Heap) Push(e int) {
 	h.b = append(h.b, e)
+	h.size += 1
 	h.upShift(len(h.b))
 }
 
