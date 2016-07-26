@@ -1,6 +1,7 @@
-package stack
+package stack_test
 
 import (
+	. "ds/stack"
 	"fmt"
 	"testing"
 )
