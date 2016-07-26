@@ -1,6 +1,9 @@
-package set
+package set_test
 
-import "testing"
+import (
+	. "ds/set"
+	"testing"
+)
 
 func TestSet(t *testing.T) {
 	s := New()
