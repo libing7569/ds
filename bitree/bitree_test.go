@@ -1,7 +1,6 @@
-package bitree_test
+package bitree
 
 import (
-	. "ds/bitree"
 	"fmt"
 	"testing"
 )
