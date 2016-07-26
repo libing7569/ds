@@ -1,7 +1,6 @@
-package set_test
+package set
 
 import (
-	. "ds/set"
 	"testing"
 )
 
