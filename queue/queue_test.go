@@ -1,6 +1,9 @@
-package queue
+package queue_test
 
-import "testing"
+import (
+	. "ds/queue"
+	"testing"
+)
 
 func TestQueue(t *testing.T) {
 
