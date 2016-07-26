@@ -1,7 +1,6 @@
-package heap_test
+package heap
 
 import (
-	. "ds/heap"
 	"fmt"
 	"testing"
 )
